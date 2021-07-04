@@ -1,0 +1,18 @@
+<div>
+  <label for="note-title">Note title: </label>
+  <input
+    id="note-title"
+    [(ngModel)]="this.title"
+    placeholder="title"
+    class="form-control"
+  />
+  <label for="note-title">Note body: </label>
+  <textarea
+    id="note-title"
+    [(ngModel)]="this.body"
+    placeholder="body"
+    class="form-control"
+  ></textarea>
+
+  <button (click)="addNote()" class="btn btn-primary">Add new note</button>
+</div>

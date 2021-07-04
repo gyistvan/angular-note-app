@@ -1,0 +1,12 @@
+<h4># {{ this.index }}</h4>
+<p>{{ this.note.title | uppercase }}</p>
+<p>
+  {{ this.note.body }}
+</p>
+<p>{{ getDateCreatedAt() }}</p>
+<a routerLink="/noteEditor/{{ this.note.id }}">
+  <button class="btn btn-primary">Tovább</button>
+</a>
+<button class="btn btn-danger" (click)="onRemove(this.note?.id ?? '')">
+  Törlés
+</button>
