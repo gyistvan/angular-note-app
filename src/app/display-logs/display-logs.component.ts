@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoggerService } from '../logger.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-display-logs',
@@ -7,16 +8,9 @@ import { LoggerService } from '../logger.service';
   styleUrls: ['./display-logs.component.css']
 })
 export class DisplayLogsComponent implements OnInit {
+  constructor(public loggerService: LoggerService) {}
 
-  constructor(loggerService: LoggerService) { this.loggerService = loggerService}
+  ngOnInit(): void {}
 
-  loggerService: LoggerService
-  logs: Array<{id:string}:string>
-  
-
-  ngOnInit(): void {
-    this.logs = this.loggerService.getLogs()
-
-  }
-
+  formatDate = (date: Date, format: string) => moment(date).format(format);
 }

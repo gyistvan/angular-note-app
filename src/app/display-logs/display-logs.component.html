@@ -1,1 +1,9 @@
-<p>display-logs works!</p>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let log of loggerService.logs">
+    <span>{{ formatDate(log.createdAt, "YYYY-MM-DD HH:mm:ss") }} </span>
+    <span>{{ log.log }}</span>
+  </li>
+</ul>
+<button class="btn btn-danger" (click)="loggerService.clearLogs()">
+  Logok törlése
+</button>

@@ -1,19 +1,35 @@
 import { Injectable } from '@angular/core';
+import { Log } from './types';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoggerService {
-  constructor() {}
+  constructor() {this.logs = this.getLogs()}
 
-  clearLog(): void {
-    localStorage.removeItem('logs');
+  logs:Log[] = []
+
+  clearLogs(): void {
+    this.logs = [];
+    this.updateLogs()
+  }
+
+  updateLogs(): void{
+    localStorage.setItem("logs", JSON.stringify(this.logs))
   }
 
   createNewLog(log: string): void {
-    let logs = JSON.parse(localStorage.getItem("logs") ?? "[]");
     let createdAt = new Date();
-    logs.push({log, createdAt});
-    localStorage.setItem("logs", JSON.stringify(logs))
+    this.logs.push({log, createdAt});
+    this.updateLogs()
+  }
+
+  getLogs(): Log[]{
+    return JSON.parse(localStorage.getItem("logs") ?? "[]");
+  }
+
+  ngOnInit(){
+    this.logs = this.getLogs()
   }
 }

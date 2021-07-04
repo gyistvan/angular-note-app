@@ -1,18 +1,19 @@
 <div>
-  <label for="note-title">Note title: </label>
+  <label for="note-title">Jegyzet cím: </label>
   <input
     id="note-title"
     [(ngModel)]="this.title"
     placeholder="title"
     class="form-control"
   />
-  <label for="note-title">Note body: </label>
+  <label for="note-title">Jegyzet szövege: </label>
   <textarea
     id="note-title"
     [(ngModel)]="this.body"
     placeholder="body"
     class="form-control"
   ></textarea>
+  <label for="note-type"></label>
 
   <button (click)="addNote()" class="btn btn-primary">Add new note</button>
 </div>

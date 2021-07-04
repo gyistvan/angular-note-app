@@ -4,3 +4,8 @@ export type Note = {
   body: string;
   createdAt: Date;
 };
+
+export type Log = {
+  createdAt: Date;
+  log: string;
+};

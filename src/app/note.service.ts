@@ -9,6 +9,8 @@ export class NoteService {
   constructor(loggerService: LoggerService) {this.loggerService = loggerService}
   
   loggerService: LoggerService
+  notes: Note[] = JSON.parse(localStorage.getItem("notes") ?? "[]");
+
 
   getNewId(): string{
      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -17,10 +19,12 @@ export class NoteService {
   });
   }
 
-  getNotes(): Note[] {
-    let notes = JSON.parse(localStorage.getItem("notes") ?? "[]");
-    this.loggerService.createNewLog("logs fetched");
-    return notes;
+  getNotes = (): Note[] => this.notes
+
+  getNote = (id:string): Note | undefined => this.notes.find((note: Note) => note.id === id)
+
+  updateNotes():void  {
+    localStorage.setItem("notes", JSON.stringify(this.notes))
   }
 
   addNote(title: string, body: string):void {
@@ -29,16 +33,14 @@ export class NoteService {
       title, body,
       createdAt: new Date()
     }
-    let notes = JSON.parse(localStorage.getItem("notes") ?? "[]")
-    notes.push(note);
+    this.notes.push(note);
     this.loggerService.createNewLog(`new note has been added with title: ${title}`)
-    localStorage.setItem("notes", JSON.stringify(notes))
+    this.updateNotes()
   }
 
   removeNote(id: string): void {
-    let notes = JSON.parse(localStorage.getItem("notes") ?? "[]")
-    notes = notes.filter((note:Note) => note.id !== id)
-    this.loggerService.createNewLog(`log has been deleted with id: ${id}`)
-    localStorage.setItem("notes", JSON.stringify(notes))
+    this.notes = this.notes.filter((note:Note) => note.id !== id)
+    this.loggerService.createNewLog(`a log has been deleted with id: ${id}`)
+    this.updateNotes()
   }
 }
