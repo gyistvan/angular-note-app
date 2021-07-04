@@ -15,5 +15,11 @@
   ></textarea>
   <label for="note-type"></label>
 
-  <button (click)="addNote()" class="btn btn-primary">Add new note</button>
+  <button
+    (click)="addNote()"
+    class="btn btn-primary"
+    [disabled]="!this.title || !this.body"
+  >
+    Add new note
+  </button>
 </div>
